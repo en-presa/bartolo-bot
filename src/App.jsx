@@ -1,7 +1,13 @@
+import TopAppBar from "./components/TopAppBar";
+import Chat from "./components/Chat";
+import UserInput from "./components/UserInput";
+
 function App() {
   return (
     <>
-      <h1 className="text-xl font-bold">Hola mundo!</h1>
+      <TopAppBar />
+      <Chat />
+      <UserInput />
     </>
   );
 }
