@@ -1,3 +1,5 @@
+import { ArrowUpIcon } from "@heroicons/react/24/outline";
+
 export default function TextField() {
   return (
     <form className="flex h-16 w-full flex-row items-center justify-between rounded-full bg-neutral pl-7 pr-5">
@@ -10,7 +12,7 @@ export default function TextField() {
         type="submit"
         className="size-10 rounded-full bg-secondary px-2 py-2"
       >
-        ⬆️
+        <ArrowUpIcon />
       </button>
     </form>
   );

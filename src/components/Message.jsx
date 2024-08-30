@@ -1,34 +1,36 @@
 import PropTypes from "prop-types";
-import Icon from "./Icon";
+import AppIcon from "./AppIcon";
+import DefaultUserIcon from "./DefaultUserIcon";
 
 function UserMessage({ content }) {
   return (
-    <div className="flex flex-row items-start justify-end gap-6 py-3 pl-[76px] pr-3">
-      <p className="min-h-5 flex-grow text-left align-middle text-base">
-        {content}
-      </p>
-      <Icon />
+    <div className="flex max-w-[66%] flex-row items-center justify-end gap-6 px-3 py-3">
+      <p className="min-h-5 flex-grow text-left text-base">{content}</p>
+      <DefaultUserIcon className="self-start" />
     </div>
   );
 }
 
 function BotMessage({ content }) {
   return (
-    <div className="flex flex-row items-start justify-start gap-6 py-3 pl-3 pr-[76px]">
-      <Icon />
-      <p className="min-h-5 flex-grow text-left align-middle text-base">
-        {content}
-      </p>
+    <div className="flex w-full flex-row items-center justify-start gap-6 py-3 pl-3 pr-[76px]">
+      <div className="flex size-10 min-h-10 min-w-10 flex-row items-center justify-center self-start rounded-full border-2 border-gray-200 bg-secondary">
+        <AppIcon className="size-6" />
+      </div>
+      <p className="min-h-5 flex-grow text-left text-base">{content}</p>
     </div>
   );
 }
 
-export default function Message({ content, reverse = false }) {
-  if (reverse) return <BotMessage content={content} />;
+export default function Message({ content, botMessage = false }) {
+  if (botMessage) return <BotMessage content={content} />;
   return <UserMessage content={content} />;
 }
 
 Message.propTypes = {
   content: PropTypes.string.isRequired,
-  reverse: PropTypes.bool,
+  botMessage: PropTypes.bool,
 };
+
+UserMessage.propTypes = Message.propTypes;
+BotMessage.propTypes = Message.propTypes;
