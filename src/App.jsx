@@ -1,46 +1,36 @@
-import TopAppBar from "./components/TopAppBar";
-import ChatContainer from "./components/ChatContainer";
-import UserInput from "./components/UserInput";
-import { useState, useRef, useEffect } from "react";
-import useAutoResizeTextarea from "./hooks/useAutoResizeTextarea";
+import { Webchat, WebchatProvider, getClient } from "@botpress/webchat";
+import { buildTheme } from "@botpress/webchat-generator";
+import "./index.css";
 
-function App() {
-  const { textareaRef, inputValue, isMultiline, setInputValue } =
-    useAutoResizeTextarea(10, 24);
-  const [bottomSpacing, setBottomSpacing] = useState(114);
-  const userInputRef = useRef(null);
-  const chatContainerRef = useRef(null);
+const { theme, style } = buildTheme({
+  themeName: "prism",
+  themeColor: "#634433",
+});
 
-  useEffect(() => {
-    if (userInputRef.current) {
-      const userInputHeight = userInputRef.current.scrollHeight;
-      setBottomSpacing(userInputHeight);
-      if (chatContainerRef.current) {
-        chatContainerRef.current.scrollTop = userInputHeight;
-      }
-    }
-  }, [inputValue]);
+//Add your Client ID here ⬇️
+const clientId = "6f2700a3-2f33-45d4-8112-08fc6fb63141";
 
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
+const config = {
+  composerPlaceholder: "Escribe una instrucción",
+  botName: "BartoloBot",
+  botAvatar: "./assets/logo.svg",
+  botDescription: "¡Hola! 👋 Soy un ChatBot para Ingeniería.",
+};
+
+export default function App() {
+  const client = getClient({ clientId });
 
   return (
-    <div className="flex h-full min-h-screen flex-col items-center overflow-hidden bg-accent text-gray-200">
-      <TopAppBar />
-      <ChatContainer
-        innerRef={chatContainerRef}
-        bottomSpacing={bottomSpacing}
-      />
-      <UserInput
-        innerRef={userInputRef}
-        textareaRef={textareaRef}
-        inputValue={inputValue}
-        isMultiline={isMultiline}
-        onChange={handleChange}
-      />
+    <div style={{ height: "100vh", width: "100wh" }}>
+      <style>{style}</style>
+      <WebchatProvider
+        theme={theme}
+        client={client}
+        key={JSON.stringify(config)}
+        configuration={config}
+      >
+        <Webchat />
+      </WebchatProvider>
     </div>
   );
 }
-
-export default App;
