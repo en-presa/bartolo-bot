@@ -1,10 +1,17 @@
 import { Webchat, WebchatProvider, getClient } from "@botpress/webchat";
 import { buildTheme } from "@botpress/webchat-generator";
+import logo from "./assets/logo.svg";
 import "./index.css";
 
 const { theme, style } = buildTheme({
-  themeName: "prism",
-  themeColor: "#634433",
+  themeName: "bartoloTheme",
+  themeColor: "#9290C3",
+  backgroundColor: "#f5f5f5",
+  textColorOnBackground: "#333333",
+  botMessageColor: "#a3c9a8",
+  botMessageBackgroundColor: "#272727",
+  userMessageColor: "#ffffff",
+  userMessageBackgroundColor: "#00aaff",
 });
 
 //Add your Client ID here ⬇️
@@ -13,8 +20,7 @@ const clientId = "6f2700a3-2f33-45d4-8112-08fc6fb63141";
 const config = {
   composerPlaceholder: "Escribe una instrucción",
   botName: "BartoloBot",
-  botAvatar: "./assets/logo.svg",
-  botDescription: "¡Hola! 👋 Soy un ChatBot para Ingeniería.",
+  botAvatar: logo,
 };
 
 export default function App() {
