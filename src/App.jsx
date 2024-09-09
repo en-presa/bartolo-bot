@@ -27,7 +27,7 @@ export default function App() {
   const client = getClient({ clientId });
 
   return (
-    <div style={{ height: "100vh", width: "100wh" }}>
+    <div style={{ height: "100svh", width: "100wh" }}>
       <style>{style}</style>
       <WebchatProvider
         theme={theme}
